@@ -1,0 +1,17 @@
+<nb-card>
+  <nb-card-header class="d-flex justify-content-between">
+    <div>Saldo Other Table</div>
+    <div>Общее количество элементов: 17 <br>
+      Общая сумма Net Migration: -2683
+    </div>
+  </nb-card-header>
+
+  <nb-card-body [nbSpinner]="loading"
+                nbSpinnerStatus="primary">
+    <ng2-smart-table [settings]="settings" [source]="source"
+                     (createConfirm)="onCreateConfirm($event)"
+                     (editConfirm)="onSaveConfirm($event)"
+                     (deleteConfirm)="onDeleteConfirm($event)">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
