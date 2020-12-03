@@ -28,7 +28,7 @@
           <button class="header-buttons" (click)="openMatClassifier(report)" nbButton>Фильтр по материалам</button>
         </div>
         <div class="col-3" >
-          <button class="header-buttons" nbButton>Получатели</button>
+          <button class="header-buttons" [routerLink]="'/admin/recipients/' + report.id" nbButton>Получатели</button>
         </div>
         <div class="col-5">
           <button class="header-buttons" *ngIf="report.isSending" nbButton status = 'danger'>Остановить публикацию</button>

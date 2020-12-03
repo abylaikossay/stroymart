@@ -10,7 +10,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://api.smartplaza.kz',
+  apiUrl: 'http://172.20.21.136:8080',
   imageUrl: 'https://api.smartplaza.kz/partners/api/file/logo',
   tokenPrefix: 'Bearer ',
   apiToken: 'apiToken',

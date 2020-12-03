@@ -15,11 +15,16 @@ export class DashboardComponent implements OnInit {
   displayedColumns: string[] = ['image', 'name', 'amount', 'status', 'dates'];
 
   constructor(private reportService: ReportService,
-              private router: Router) {
+              private router: Router
+  ) {
   }
 
   ngOnInit(): void {
-    this.dataSource = [
+    this.reportService.getAll().subscribe( response => {
+      console.log(response);
+      // this.dataSource = response;
+    });
+      this.dataSource = [
       {
         id: 1,
         name: 'Наименование отчета',

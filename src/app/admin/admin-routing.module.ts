@@ -23,6 +23,11 @@ const routes: Routes = [{
         .then(m => m.ReportSettingsModule),
     },
     {
+      path: 'recipients',
+      loadChildren: () => import('./recipients/recipients.module')
+        .then(m => m.RecipientsModule),
+    },
+    {
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full',

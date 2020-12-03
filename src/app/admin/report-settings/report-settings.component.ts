@@ -34,6 +34,7 @@ export class ReportSettingsComponent implements OnInit {
       context: this.report,
     });
   }
+
   changed(report: any) {
     console.log(report);
   }
@@ -43,6 +44,7 @@ export class ReportSettingsComponent implements OnInit {
     const dialogRef = this.matDialog.open(MaterialClassifierDialogComponent, {
       data: report,
       panelClass: 'additional-info-modal',
+      height: '90vw',
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);

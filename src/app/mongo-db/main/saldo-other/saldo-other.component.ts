@@ -45,8 +45,10 @@ export class SaldoOtherComponent implements OnInit {
 
   source: LocalDataSource = new LocalDataSource();
   loading: boolean = false;
-  migrationSum: number;
-  totalAmount: number;
+  // migrationSum: number = 695;
+  totalAmount: number = 20;
+  totalAlmatyAmount: number = 2;
+  migrationSumAlmaty: number = 695;
   constructor(private mongoService: MongoService) {
   }
 
@@ -70,6 +72,9 @@ export class SaldoOtherComponent implements OnInit {
     this.mongoService.getSaldoOther().subscribe(resp => {
       console.log(resp);
       this.source.load(resp);
+    });
+    this.mongoService.getTotalSaldo().subscribe(resp => {
+      console.log(resp);
     });
     // this.mongoService.getTotalSaldo().subscribe(resp => {
     //   console.log(resp);

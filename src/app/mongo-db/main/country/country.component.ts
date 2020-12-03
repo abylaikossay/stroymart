@@ -30,24 +30,29 @@ export class CountryComponent implements OnInit {
       id: {
         title: 'ID',
         type: 'string',
+        filter: false,
       },
       Code: {
         title: 'Code',
         type: 'string',
+        filter: false,
       },
       NameKaz: {
         title: 'NameKaz',
         type: 'string',
+        filter: false,
       },
       NameRus: {
         title: 'NameRus',
         type: 'string',
+        filter: false,
       },
     },
   };
 
   source: LocalDataSource = new LocalDataSource();
   loading: boolean = false;
+  search: any;
 
   constructor(
     private mongoService: MongoService) {
@@ -71,9 +76,23 @@ export class CountryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.mongoService.getCountries().subscribe(resp => {
+    this.fetchAll();
+    this.readySearch();
+  }
+
+  readySearch() {
+    this.search = {code: '', NameKaz: '', NameRus: ''};
+  }
+
+  fetchAll(key?: string, val?: string) {
+    this.loading = true;
+    this.mongoService.getCountries(key, val).subscribe(resp => {
       console.log(resp);
       this.source.load(resp);
+      this.loading = false;
+      // this.source.setFilter([{field: 'Code', search: 'AF'}]);
+    }, error => {
+      this.loading = false;
     });
   }
 
@@ -101,4 +120,40 @@ export class CountryComponent implements OnInit {
     });
   }
 
+  // searchFilter() {
+  //   console.log(this.search);
+  //   if (this.search.NameRus !== '') {
+  //     this.fetchAll('NameRus', this.search.NameRus);
+  //   }
+  //   if (this.search.Code !== '') {
+  //     console.log(this.search.code);
+  //     this.fetchAll('Code', this.search.Code);
+  //   }
+  //   if (this.search.NameKaz !== '') {
+  //     this.fetchAll('NameKaz', this.search.NameKaz);
+  //   }
+  //
+  // }
+
+  searchCode() {
+    if (this.search.code !== '') {
+      this.fetchAll('Code', this.search.code);
+    } else {
+      this.fetchAll();
+    }
+  }
+  searchNameKaz() {
+    if (this.search.NameKaz !== '') {
+      this.fetchAll('NameKaz', this.search.NameKaz);
+    } else {
+      this.fetchAll();
+    }
+  }
+  searchNameRus() {
+    if (this.search.NameRus !== '') {
+      this.fetchAll('NameRus', this.search.NameRus);
+    } else {
+      this.fetchAll();
+    }
+  }
 }

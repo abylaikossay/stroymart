@@ -18,15 +18,31 @@ export class MongoService {
   }
 
   public getTotalSaldo() {
-    return this.http.get<any>(this.saldosngUrl + '/sum/count');
+    return this.http.get<any>(this.saldootherUrl + '/sum/count');
   }
 
   public getCiVil(): Observable<any> {
     return this.http.get<any>(this.civilUrl);
   }
 
-  public getCountries(): Observable<any> {
-    return this.http.get<any>(this.countryUrl);
+  public getCountries(key?: string, value?: string): Observable<any> {
+    if (!key || key === '') {
+      key = '';
+    }
+    if (!value || value === '') {
+      value = '';
+    }
+    if (value === undefined) {
+      key = '';
+      value = '';
+    }
+
+    return this.http.get<any>(this.countryUrl, {
+      params: {
+        searchVal: value,
+        searchKey: key,
+      },
+    });
   }
 
   public getMinTruda(): Observable<any> {
