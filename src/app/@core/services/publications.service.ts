@@ -5,14 +5,14 @@ import {HttpClient} from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
-export class ReportService {
-  fullUrl = environment.apiUrl + '/api/reports/';
+export class PublicationsService {
+  fullUrl = environment.apiUrl + '/api/publications/';
 
   constructor(private http: HttpClient) {
   }
 
   public getAll() {
-    return this.http.get<any>(this.fullUrl + 'findAll/V2');
+    return this.http.get<any>(this.fullUrl + 'findAll');
   }
 
   public getById(id: any) {
